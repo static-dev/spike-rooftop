@@ -1,0 +1,27 @@
+{
+  "name": "roots-mini-rooftop",
+  "description": "Rooftop plugin for roots-mini",
+  "version": "0.0.0",
+  "author": "Jeff Escalante",
+  "ava": {
+    "verbose": "true"
+  },
+  "bugs": "https://github.com/carrot/roots-mini-rooftop/issues",
+  "dependencies": {
+    "rooftop-client": "0.0.2"
+  },
+  "devDependencies": {
+    "ava": "0.14.x",
+    "standard": "7.x"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "homepage": "https://github.com/carrot/roots-mini-rooftop",
+  "license": "MIT",
+  "main": "lib",
+  "repository": "carrot/roots-mini-rooftop",
+  "scripts": {
+    "test": "ava"
+  }
+}
