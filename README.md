@@ -96,6 +96,14 @@ rooftop({
 })
 ```
 
+### Testing
+
+To run the tests locally, you'll need to add a `test/.env` with your name and token values:
+
+- `cp test/.env.sample test/.env`
+- `name` is derived from your Rooftop url. Assuming your URL is https://myproject.rooftop.io then **myproject** is your name value
+- `token` can be found <https://[myproject].rooftopcms.io/wp-admin/admin.php?page=rooftop-overview>
+
 ### License & Contributing
 
 - Details on the license [can be found here](LICENSE.md)

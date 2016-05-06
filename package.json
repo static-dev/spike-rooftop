@@ -8,10 +8,12 @@
   },
   "bugs": "https://github.com/carrot/roots-mini-rooftop/issues",
   "dependencies": {
-    "rooftop-client": "0.0.2"
+    "rooftop-client": "0.0.2",
+    "when": "^3.7.7"
   },
   "devDependencies": {
     "ava": "0.14.x",
+    "dotenv": "^2.0.0",
     "standard": "7.x"
   },
   "engines": {
