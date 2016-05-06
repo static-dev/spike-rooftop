@@ -53,6 +53,21 @@ test('implements request options', (t) => {
     })
 })
 
-test.todo('implements transform function')
+test('works with custom transform function', (t) => {
+  const api = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    contentTypes: [{
+      name: 'posts',
+      transform: (post) => { post.doge = 'wow'; return post }
+    }]
+  })
+
+  return api.run({ options: { locals: {} } }, undefined, () => {})
+    .then((res) => {
+      t.is(res.posts[0].doge, 'wow')
+    })
+})
+
 test.todo('can disable transform function')
-test.todo('works with custom transform function')
+test.todo('implements default transform function')
