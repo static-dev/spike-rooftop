@@ -69,5 +69,31 @@ test('works with custom transform function', (t) => {
     })
 })
 
-test.todo('can disable transform function')
-test.todo('implements default transform function')
+test('implements default transform function', (t) => {
+  const api = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    contentTypes: ['posts']
+  })
+
+  return api.run({ options: { locals: {} } }, undefined, () => {})
+    .then((res) => {
+      t.truthy(typeof res.posts[0].title === 'string')
+    })
+})
+
+test('can disable transform function', (t) => {
+  const api = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    contentTypes: [{
+      name: 'posts',
+      transform: false
+    }]
+  })
+
+  return api.run({ options: { locals: {} } }, undefined, () => {})
+    .then((res) => {
+      t.truthy(typeof res.posts[0].title === 'object')
+    })
+})

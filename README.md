@@ -83,7 +83,7 @@ rooftop({
 })
 ```
 
-In addition, if you pass `true` as the value of `transform`, we will run it through a standard internal function that cleans it up in a way that is probably good enough.
+We run a default transform function that cleans up response objects for you, out of the box. However, if you'd like ti disable this and get back the raw response directly from rooftop, if you pass `false` as the value of `transform`, it will come back untouched.
 
 ```js
 rooftop({
@@ -91,7 +91,7 @@ rooftop({
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
-    transform: true // this will run our standard cleanup function
+    transform: false // disable our standard transform function
   }]
 })
 ```
