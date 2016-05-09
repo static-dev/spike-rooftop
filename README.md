@@ -83,7 +83,7 @@ rooftop({
 })
 ```
 
-We run a default transform function that cleans up response objects for you, out of the box. However, if you'd like ti disable this and get back the raw response directly from rooftop, if you pass `false` as the value of `transform`, it will come back untouched.
+We run a default transform function that cleans up response objects for you, out of the box. However, if you'd like to disable this and get back the raw response directly from rooftop, if you pass `false` as the value of `transform`, it will come back untouched.
 
 ```js
 rooftop({

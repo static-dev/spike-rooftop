@@ -2,6 +2,10 @@ require('dotenv').config({ silent: true })
 
 const test = require('ava')
 const Rooftop = require('..')
+const RootsMini = require('roots-mini')
+const path = require('path')
+const fs = require('fs')
+const rimraf = require('rimraf')
 
 test('errors without a "name"', (t) => {
   t.throws(
@@ -96,4 +100,23 @@ test('can disable transform function', (t) => {
     .then((res) => {
       t.truthy(typeof res.posts[0].title === 'object')
     })
+})
+
+test.cb('works as a plugin to roots-mini', (t) => {
+  const projectPath = path.join(__dirname, 'fixtures/default')
+  const project = new RootsMini({
+    root: projectPath,
+    entry: { main: [path.join(projectPath, 'main.js')] }
+  })
+
+  project.on('error', t.end)
+  project.on('warning', t.end)
+  project.on('compile', () => {
+    const src = JSON.parse(fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8'))
+    t.truthy(src.posts.length > 1)
+    rimraf.sync(path.join(projectPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
 })
