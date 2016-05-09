@@ -22,7 +22,7 @@ This is just a webpack plugin, but it only works with roots-mini projects since 
 // app.js
 const rooftop = require('roots-mini-rooftop')
 
-export default {
+module.exports = {
   // all your other settings...
   plugins: [
     rooftop({ name: 'xxx', apiToken: 'xxx' })
