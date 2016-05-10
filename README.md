@@ -33,7 +33,7 @@ module.exports = {
 Once included, it will expose a `rooftop` local to your jade files, which you can use to iterate through your posts. By default, it will only pull the `post` content type, which can be accessed through `rooftop.posts`, as such:
 
 ```jade
-// a jade file
+//- a jade file
 ul
   for post in rooftop.posts
     li= JSON.stringify(post)
