@@ -1,6 +1,6 @@
-# Contributing to roots-mini-rooftop
+# Contributing to spike-rooftop
 
-Hello there! First of all, thanks for being interested in roots-mini-rooftop and helping out. We all think you are awesome, and by contributing to open source projects, you are making the world a better place. That being said, there are a few ways to make the process of contributing code to roots-mini-rooftop smoother, detailed below:
+Hello there! First of all, thanks for being interested in spike-rooftop and helping out. We all think you are awesome, and by contributing to open source projects, you are making the world a better place. That being said, there are a few ways to make the process of contributing code to spike-rooftop smoother, detailed below:
 
 ### Filing Issues
 

@@ -2,7 +2,7 @@ require('dotenv').config({ silent: true })
 
 const test = require('ava')
 const Rooftop = require('..')
-const RootsMini = require('roots-mini')
+const Spike = require('spike')
 const path = require('path')
 const fs = require('fs')
 const rimraf = require('rimraf')
@@ -10,14 +10,14 @@ const rimraf = require('rimraf')
 test('errors without a "name"', (t) => {
   t.throws(
     () => { new Rooftop() }, // eslint-disable-line
-    'ValidationError: [roots-mini-rooftop constructor] option "name" is required'
+    'ValidationError: [spike-rooftop constructor] option "name" is required'
   )
 })
 
 test('errors without an "apiToken"', (t) => {
   t.throws(
     () => { new Rooftop({ name: 'xxx' }) }, // eslint-disable-line
-    'ValidationError: [roots-mini-rooftop constructor] option "apiToken" is required'
+    'ValidationError: [spike-rooftop constructor] option "apiToken" is required'
   )
 })
 
@@ -102,9 +102,9 @@ test('can disable transform function', (t) => {
     })
 })
 
-test.cb('works as a plugin to roots-mini', (t) => {
+test.cb('works as a plugin to spike', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
-  const project = new RootsMini({
+  const project = new Spike({
     root: projectPath,
     entry: { main: [path.join(projectPath, 'main.js')] }
   })
