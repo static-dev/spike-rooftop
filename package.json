@@ -29,6 +29,7 @@
   "repository": "static-dev/spike-rooftop",
   "scripts": {
     "test": "ava",
-    "coverage": "nyc ava"
+    "coverage": "nyc ava",
+    "coveralls": "nyc --reporter=lcov ava && cat ./coverage/lcov.info | coveralls"
   }
 }
