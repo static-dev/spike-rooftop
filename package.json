@@ -1,12 +1,12 @@
 {
-  "name": "roots-mini-rooftop",
-  "description": "Rooftop plugin for roots-mini",
+  "name": "spike-rooftop",
+  "description": "Rooftop plugin for spike",
   "version": "0.0.1",
   "author": "Jeff Escalante",
   "ava": {
     "verbose": "true"
   },
-  "bugs": "https://github.com/carrot/roots-mini-rooftop/issues",
+  "bugs": "https://github.com/static-dev/spike-rooftop/issues",
   "dependencies": {
     "rooftop-client": "0.0.2",
     "when": "^3.7.7"
@@ -15,16 +15,16 @@
     "ava": "0.14.x",
     "dotenv": "^2.0.0",
     "rimraf": "^2.5.2",
-    "roots-mini": "0.0.23",
+    "spike": "0.0.23",
     "standard": "7.x"
   },
   "engines": {
     "node": ">= 6.0.0"
   },
-  "homepage": "https://github.com/carrot/roots-mini-rooftop",
+  "homepage": "https://github.com/static-dev/spike-rooftop",
   "license": "MIT",
   "main": "lib",
-  "repository": "carrot/roots-mini-rooftop",
+  "repository": "static-dev/spike-rooftop",
   "scripts": {
     "test": "ava"
   }

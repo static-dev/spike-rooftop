@@ -1,8 +1,8 @@
-# Roots-Mini Rooftop Plugin
+# Spike Rooftop Plugin
 
-[![npm](http://img.shields.io/npm/v/roots-mini-rooftop.svg?style=flat)](https://badge.fury.io/js/roots-mini-rooftop) [![tests](http://img.shields.io/travis/carrot/roots-mini-rooftop/master.svg?style=flat)](https://travis-ci.org/carrot/roots-mini-rooftop) [![dependencies](http://img.shields.io/david/carrot/roots-mini-rooftop.svg?style=flat)](https://david-dm.org/carrot/roots-mini-rooftop)
+[![npm](http://img.shields.io/npm/v/spike-rooftop.svg?style=flat)](https://badge.fury.io/js/spike-rooftop) [![tests](http://img.shields.io/travis/static-dev/spike-rooftop/master.svg?style=flat)](https://travis-ci.org/static-dev/spike-rooftop) [![dependencies](http://img.shields.io/david/static-dev/spike-rooftop.svg?style=flat)](https://david-dm.org/static-dev/spike-rooftop)
 
-Rooftop plugin for roots-mini
+Rooftop plugin for spike
 
 > **Note:** This project is in early development, and versioning is a little different. [Read this](http://markup.im/#q4_cRZ1Q) for more details.
 
@@ -12,15 +12,15 @@ Write about why this project is important.
 
 ### Installation
 
-`npm install roots-mini-rooftop -S`
+`npm install spike-rooftop -S`
 
 ### Usage
 
-This is just a webpack plugin, but it only works with roots-mini projects since it takes advantage of custom settings that are passed to the core plugins. You can include it in your roots-mini project like this:
+This is just a webpack plugin, but it only works with spike projects since it takes advantage of custom settings that are passed to the core plugins. You can include it in your spike project like this:
 
 ```js
 // app.js
-const rooftop = require('roots-mini-rooftop')
+const rooftop = require('spike-rooftop')
 
 module.exports = {
   // all your other settings...
