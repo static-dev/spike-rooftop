@@ -26,7 +26,8 @@
   "homepage": "https://github.com/static-dev/spike-rooftop",
   "keywords": [
     "spikeplugin",
-    "rooftopcms"
+    "rooftopcms",
+    "spike"
   ],
   "license": "MIT",
   "main": "lib",

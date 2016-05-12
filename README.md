@@ -3,13 +3,13 @@
 [![npm](http://img.shields.io/npm/v/spike-rooftop.svg?style=flat)](https://badge.fury.io/js/spike-rooftop) [![tests](http://img.shields.io/travis/static-dev/spike-rooftop/master.svg?style=flat)](https://travis-ci.org/static-dev/spike-rooftop) [![dependencies](http://img.shields.io/david/static-dev/spike-rooftop.svg?style=flat)](https://david-dm.org/static-dev/spike-rooftop)
 [![coverage](http://img.shields.io/coveralls/static-dev/spike-rooftop.svg?style=flat)](https://coveralls.io/github/static-dev/spike-rooftop)
 
-Rooftop plugin for spike
+[Rooftop CMS](https://www.rooftopcms.com/) plugin for [spike](https://github.com/static-dev/spike)
 
 > **Note:** This project is in early development, and versioning is a little different. [Read this](http://markup.im/#q4_cRZ1Q) for more details.
 
 ### Why should you care?
 
-If you are using the lovely [Rooftop CMS](https://www.rooftopcms.com/) and want to pull your API values in and compile them into a spike static site, this plugin will do some good work for you :grin:
+If you are using the lovely [Rooftop CMS](https://www.rooftopcms.com/) and want to pull your API values in and compile them into a [spike](https://github.com/static-dev/spike) static site, this plugin will do some good work for you :grin:
 
 ### Installation
 
@@ -17,7 +17,7 @@ If you are using the lovely [Rooftop CMS](https://www.rooftopcms.com/) and want 
 
 ### Usage
 
-This is just a webpack plugin, but it only works with spike projects since it takes advantage of custom settings that are passed to the core plugins. You can include it in your spike project like this:
+This is just a [webpack](https://webpack.github.io/) plugin, but it only works with spike projects since it takes advantage of custom settings that are passed to the core plugins. You can include it in your spike project like this:
 
 ```js
 // app.js
