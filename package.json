@@ -13,9 +13,11 @@
   },
   "devDependencies": {
     "ava": "0.14.x",
+    "coveralls": "^2.11.9",
     "dotenv": "^2.0.0",
+    "nyc": "^6.4.4",
     "rimraf": "^2.5.2",
-    "spike": "0.0.23",
+    "spike": "^0.2.0",
     "standard": "7.x"
   },
   "engines": {
@@ -26,6 +28,7 @@
   "main": "lib",
   "repository": "static-dev/spike-rooftop",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "coverage": "nyc ava"
   }
 }

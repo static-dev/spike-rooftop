@@ -7,6 +7,8 @@ const path = require('path')
 const fs = require('fs')
 const rimraf = require('rimraf')
 
+const compilerMock = { options: { spike: { locals: {} } } }
+
 test('errors without a "name"', (t) => {
   t.throws(
     () => { new Rooftop() }, // eslint-disable-line
@@ -33,7 +35,7 @@ test('returns valid content', (t) => {
     contentTypes: ['posts', 'case_studies']
   })
 
-  return api.run({ options: { locals: {} } }, undefined, () => {})
+  return api.run(compilerMock, undefined, () => {})
     .then((res) => {
       t.is(res.posts.length, 2)
       t.is(res.case_studies.length, 1)
@@ -50,7 +52,7 @@ test('implements request options', (t) => {
     }]
   })
 
-  return api.run({ options: { locals: {} } }, undefined, () => {})
+  return api.run(compilerMock, undefined, () => {})
     .then((res) => {
       t.is(res.posts.length, 1)
       t.is(res.posts[0].slug, 'testing-123')
@@ -67,7 +69,7 @@ test('works with custom transform function', (t) => {
     }]
   })
 
-  return api.run({ options: { locals: {} } }, undefined, () => {})
+  return api.run(compilerMock, undefined, () => {})
     .then((res) => {
       t.is(res.posts[0].doge, 'wow')
     })
@@ -80,7 +82,7 @@ test('implements default transform function', (t) => {
     contentTypes: ['posts']
   })
 
-  return api.run({ options: { locals: {} } }, undefined, () => {})
+  return api.run(compilerMock, undefined, () => {})
     .then((res) => {
       t.truthy(typeof res.posts[0].title === 'string')
     })
@@ -96,7 +98,7 @@ test('can disable transform function', (t) => {
     }]
   })
 
-  return api.run({ options: { locals: {} } }, undefined, () => {})
+  return api.run(compilerMock, undefined, () => {})
     .then((res) => {
       t.truthy(typeof res.posts[0].title === 'object')
     })
