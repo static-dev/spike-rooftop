@@ -1,6 +1,7 @@
 # Spike Rooftop Plugin
 
 [![npm](http://img.shields.io/npm/v/spike-rooftop.svg?style=flat)](https://badge.fury.io/js/spike-rooftop) [![tests](http://img.shields.io/travis/static-dev/spike-rooftop/master.svg?style=flat)](https://travis-ci.org/static-dev/spike-rooftop) [![dependencies](http://img.shields.io/david/static-dev/spike-rooftop.svg?style=flat)](https://david-dm.org/static-dev/spike-rooftop)
+[![coverage](http://img.shields.io/coveralls/static-dev/spike-rooftop.svg?style=flat)](https://coveralls.io/github/static-dev/spike-rooftop)
 
 Rooftop plugin for spike
 
