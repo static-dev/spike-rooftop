@@ -9,7 +9,7 @@ Rooftop plugin for spike
 
 ### Why should you care?
 
-Write about why this project is important.
+If you are using the lovely [Rooftop CMS](https://www.rooftopcms.com/) and want to pull your API values in and compile them into a spike static site, this plugin will do some good work for you :grin:
 
 ### Installation
 
