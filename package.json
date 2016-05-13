@@ -1,6 +1,6 @@
 {
   "name": "spike-rooftop",
-  "description": "Rooftop plugin for spike",
+  "description": "RooftopCMS plugin for spike",
   "version": "0.0.2",
   "author": "Jeff Escalante",
   "ava": {
