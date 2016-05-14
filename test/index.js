@@ -2,7 +2,7 @@ require('dotenv').config({ silent: true })
 
 const test = require('ava')
 const Rooftop = require('..')
-const Spike = require('spike')
+const Spike = require('spike-core')
 const path = require('path')
 const fs = require('fs')
 const rimraf = require('rimraf')
