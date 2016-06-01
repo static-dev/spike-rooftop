@@ -21,12 +21,12 @@ This is just a [webpack](https://webpack.github.io/) plugin, but it only works w
 
 ```js
 // app.js
-const rooftop = require('spike-rooftop')
+const Rooftop = require('spike-rooftop')
 
 module.exports = {
   // all your other settings...
   plugins: [
-    rooftop({ name: 'xxx', apiToken: 'xxx' })
+    new Rooftop({ name: 'xxx', apiToken: 'xxx' })
   ]
 }
 ```
@@ -43,7 +43,7 @@ ul
 If you want to access other content types, you can easily have us grab them by customizing the `contentTypes` option, as such:
 
 ```js
-rooftop({
+new Rooftop({
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts', 'case_studies']
@@ -55,7 +55,7 @@ This would pull any `case_studies` and add it to `rooftop.case_studies` in your 
 Now let's say you want to get a little more granular in which posts you are pulling, what order they are in, etc. Rather than passing a string through the `contentTypes` array, you can pass an object instead with some extra options. For example:
 
 ```js
-rooftop({
+new Rooftop({
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
@@ -71,7 +71,7 @@ This would pull back any posts whose content matches "hello" somewhere, in ascen
 Now it is true that rooftop doesn't return the cleanest and nicest-formatted json. So you can also pass a `transform` option to each content type, where you can transform the data however you'd like before it goes into your views.
 
 ```js
-rooftop({
+new Rooftop({
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
@@ -87,7 +87,7 @@ rooftop({
 We run a default transform function that cleans up response objects for you, out of the box. However, if you'd like to disable this and get back the raw response directly from rooftop, if you pass `false` as the value of `transform`, it will come back untouched.
 
 ```js
-rooftop({
+new Rooftop({
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
