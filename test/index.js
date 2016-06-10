@@ -88,6 +88,19 @@ test('implements default transform function', (t) => {
     })
 })
 
+test('implements default when passing an object', (t) => {
+  const api = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    contentTypes: [{ name: 'posts' }]
+  })
+
+  return api.run(compilerMock, undefined, () => {})
+    .then((res) => {
+      t.truthy(typeof res.posts[0].title === 'string')
+    })
+})
+
 test('can disable transform function', (t) => {
   const api = new Rooftop({
     name: process.env.name,
