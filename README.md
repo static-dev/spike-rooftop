@@ -97,6 +97,17 @@ new Rooftop({
 })
 ```
 
+Finally, if you'd like to have the output written locally to a JSON file so that it is effectively cached locally, you can pass the name of the file, resolved relative to your project's output, as a `json` option to the plugin. For example:
+
+```js
+new Rooftop({
+  name: 'xxx',
+  apiToken: 'xxx',
+  contentTypes: ['posts'],
+  json: 'data.json'
+})
+```
+
 ### Testing
 
 To run the tests locally, you'll need to add a `test/.env` with your name and token values:
