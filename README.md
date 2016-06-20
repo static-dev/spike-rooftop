@@ -108,6 +108,13 @@ new Rooftop({
 })
 ```
 
+If you'd like to use our default transform outside of the library, this is also available as an export. For example, you could include it and use it with client-side js responses.
+
+```js
+const Rooftop = require('spike-rooftop')
+console.log(Rooftop.transform)
+```
+
 ### Testing
 
 To run the tests locally, you'll need to add a `test/.env` with your name and token values:
