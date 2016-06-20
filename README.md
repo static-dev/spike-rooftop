@@ -115,6 +115,27 @@ new Rooftop({
 })
 ```
 
+Using the template option allows you to write objects returned from Rooftop to single page templates. For example, if you are trying to render a blog as static, you might want each post returned from the API to be rendered as a single page by itself.
+
+The template option is an object with path and output keys. path is an absolute or relative path to a template to be used to render each item, and output is a function with the currently iterated item as a parameter, which should return a string representing a path relative to the project root where the single view should be rendered. For example:
+
+```js
+const locals = {}
+
+new Rooftop({
+  addDataTo: locals,
+  name: 'xxx',
+  apiToken: 'xxx',
+  contentTypes: [{
+    name: 'posts',
+    template: : {
+      path: 'templates/post.html',
+      output: (post) => { return `posts/${post.slug}.html` }
+    }
+  }]
+})
+```
+
 Finally, if you'd like to have the output written locally to a JSON file so that it is effectively cached locally, you can pass the name of the file, resolved relative to your project's output, as a `json` option to the plugin. For example:
 
 ```js
