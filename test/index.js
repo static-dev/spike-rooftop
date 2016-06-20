@@ -23,98 +23,117 @@ test('errors without an "apiToken"', (t) => {
   )
 })
 
-test('initializes with a name and apiToken', (t) => {
-  const rt = new Rooftop({ name: 'xxx', apiToken: 'xxx' })
+test('errors without "addDataTo"', (t) => {
+  t.throws(
+    () => { new Rooftop({ name: 'xxx', apiToken: 'xxx' }) }, // eslint-disable-line
+    'ValidationError: [spike-rooftop constructor] option "addDataTo" is required'
+  )
+})
+
+test('initializes with a name, apiToken, and addDataTo', (t) => {
+  const rt = new Rooftop({ name: 'xxx', apiToken: 'xxx', addDataTo: {} })
   t.truthy(rt)
 })
 
-test('returns valid content', (t) => {
+test.cb('returns valid content', (t) => {
+  const locals = {}
   const api = new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
+    addDataTo: locals,
     contentTypes: ['posts', 'case_studies']
   })
 
-  return api.run(compilerMock, undefined, () => {})
-    .then((res) => {
-      t.is(res.posts.length, 2)
-      t.is(res.case_studies.length, 1)
-    })
+  api.run(compilerMock, undefined, () => {
+    t.is(locals.rooftop.posts.length, 2)
+    t.is(locals.rooftop.case_studies.length, 1)
+    t.end()
+  })
 })
 
-test('implements request options', (t) => {
+test.cb('implements request options', (t) => {
+  const locals = {}
   const api = new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
+    addDataTo: locals,
     contentTypes: [{
       name: 'posts',
       search: 'hello'
     }]
   })
 
-  return api.run(compilerMock, undefined, () => {})
-    .then((res) => {
-      t.is(res.posts.length, 1)
-      t.is(res.posts[0].slug, 'testing-123')
-    })
+  api.run(compilerMock, undefined, () => {
+    t.is(locals.rooftop.posts.length, 1)
+    t.is(locals.rooftop.posts[0].slug, 'testing-123')
+    t.end()
+  })
 })
 
-test('works with custom transform function', (t) => {
+test.cb('works with custom transform function', (t) => {
+  const locals = {}
   const api = new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
+    addDataTo: locals,
     contentTypes: [{
       name: 'posts',
       transform: (post) => { post.doge = 'wow'; return post }
     }]
   })
 
-  return api.run(compilerMock, undefined, () => {})
-    .then((res) => {
-      t.is(res.posts[0].doge, 'wow')
-    })
+  api.run(compilerMock, undefined, () => {
+    t.is(locals.rooftop.posts[0].doge, 'wow')
+    t.end()
+  })
 })
 
-test('implements default transform function', (t) => {
+test.cb('implements default transform function', (t) => {
+  const locals = {}
   const api = new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
+    addDataTo: locals,
     contentTypes: ['posts']
   })
 
-  return api.run(compilerMock, undefined, () => {})
-    .then((res) => {
-      t.truthy(typeof res.posts[0].title === 'string')
-    })
+  api.run(compilerMock, undefined, () => {
+    t.truthy(typeof locals.rooftop.posts[0].title === 'string')
+    t.end()
+  })
 })
 
-test('implements default when passing an object', (t) => {
+test.cb('implements default when passing an object', (t) => {
+  const locals = {}
   const api = new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
+    addDataTo: locals,
     contentTypes: [{ name: 'posts' }]
   })
 
-  return api.run(compilerMock, undefined, () => {})
-    .then((res) => {
-      t.truthy(typeof res.posts[0].title === 'string')
-    })
+  api.run(compilerMock, undefined, () => {
+    t.truthy(typeof locals.rooftop.posts[0].title === 'string')
+    t.end()
+  })
 })
 
-test('can disable transform function', (t) => {
+test.cb('can disable transform function', (t) => {
+  const locals = {}
   const api = new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
+    addDataTo: locals,
     contentTypes: [{
       name: 'posts',
       transform: false
     }]
   })
 
-  return api.run(compilerMock, undefined, () => {})
-    .then((res) => {
-      t.truthy(typeof res.posts[0].title === 'object')
-    })
+  api.run(compilerMock, undefined, () => {
+    t.truthy(typeof locals.rooftop.posts[0].title === 'object')
+    t.end()
+  })
 })
 
 test.cb('works as a plugin to spike', (t) => {
@@ -127,8 +146,8 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('error', t.end)
   project.on('warning', t.end)
   project.on('compile', () => {
-    const src = JSON.parse(fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8'))
-    t.truthy(src.posts.length > 1)
+    const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
+    t.truthy(src === '91')
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })

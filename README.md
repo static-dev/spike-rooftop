@@ -17,19 +17,25 @@ If you are using the lovely [Rooftop CMS](https://www.rooftopcms.com/) and want 
 
 ### Usage
 
-This is just a [webpack](https://webpack.github.io/) plugin, but it only works with spike projects since it takes advantage of custom settings that are passed to the core plugins. You can include it in your spike project like this:
+This is a standard [webpack](https://webpack.github.io/) plugin, but is built for and intended to be used with [spike](https://github.com/static-dev/spike). You can include it in your spike project like this:
 
 ```js
 // app.js
 const Rooftop = require('spike-rooftop')
+const jade = require('posthtml-jade')
+const locals = {}
 
 module.exports = {
-  // all your other settings...
   plugins: [
-    new Rooftop({ name: 'xxx', apiToken: 'xxx' })
-  ]
+    new Rooftop({ addDataTo: locals, name: 'xxx', apiToken: 'xxx' })
+  ],
+  posthtml: { defaults: jade(locals) }
 }
 ```
+
+Since Spike uses posthtml, you can use a variety of different plugins to expose local variables to your html. We are using [jade](https://github.com/posthtml/posthtml-jade) here because it's the plugin provided in spike's default template, and also is currently the only plugin that provides the ability to run complex loops through objects.
+
+In order to pass the data correctly, you must pass `spike-rooftop` an object, which it will load the data onto when the compile begins under a `rooftop` key. If you also pass the same object to whatever posthtml plugin you are using in whatever manner it requires to make the data available in your html templates, the data will be present on that object before they start compiling. This is a slightly unconventional pattern for javascript libraries, but in this situation is allows for maximum flexibility and convenience.
 
 Once included, it will expose a `rooftop` local to your jade files, which you can use to iterate through your posts. By default, it will only pull the `post` content type, which can be accessed through `rooftop.posts`, as such:
 
@@ -44,6 +50,7 @@ If you want to access other content types, you can easily have us grab them by c
 
 ```js
 new Rooftop({
+  addDataTo: locals,
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts', 'case_studies']
@@ -56,6 +63,7 @@ Now let's say you want to get a little more granular in which posts you are pull
 
 ```js
 new Rooftop({
+  addDataTo: locals,
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
@@ -72,6 +80,7 @@ Now it is true that rooftop doesn't return the cleanest and nicest-formatted jso
 
 ```js
 new Rooftop({
+  addDataTo: locals,
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
@@ -88,6 +97,7 @@ We run a default transform function that cleans up response objects for you, out
 
 ```js
 new Rooftop({
+  addDataTo: locals,
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
@@ -101,6 +111,7 @@ Finally, if you'd like to have the output written locally to a JSON file so that
 
 ```js
 new Rooftop({
+  addDataTo: locals,
   name: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts'],
