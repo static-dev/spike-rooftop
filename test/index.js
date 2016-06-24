@@ -6,6 +6,7 @@ const Spike = require('spike-core')
 const path = require('path')
 const fs = require('fs')
 const rimraf = require('rimraf')
+const exp = require('posthtml-exp')
 
 const compilerMock = { options: { spike: { locals: {} } } }
 
@@ -169,6 +170,43 @@ test.cb('writes json output', (t) => {
     t.falsy(fs.accessSync(file))
     const src = JSON.parse(fs.readFileSync(path.join(projectPath, 'public/data.json'), 'utf8'))
     t.truthy(src.posts.length > 1)
+    rimraf.sync(path.join(projectPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('accepts template object and generates html', (t) => {
+  const locals = {}
+  const rooftop = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    contentTypes: [{
+      name: 'posts',
+      template: {
+        path: '../template/template.html',
+        output: (item) => `posts/${item.title}.html`
+      }
+    }]
+  })
+
+  const projectPath = path.join(__dirname, 'fixtures/default')
+  const project = new Spike({
+    root: projectPath,
+    posthtml: { defaults: [exp({ locals })] },
+    entry: { main: [path.join(projectPath, 'main.js')] },
+    plugins: [rooftop]
+  })
+
+  project.on('error', t.end)
+  project.on('warning', t.end)
+  project.on('compile', () => {
+    const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/Testing 123.html'), 'utf8')
+    const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/Welcome to Rooftop.html'), 'utf8')
+    t.is(file1.trim(), '<p>Testing 123</p>')
+    t.is(file2.trim(), '<p>Welcome to Rooftop</p>')
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
