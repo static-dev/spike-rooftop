@@ -136,6 +136,12 @@ new Rooftop({
 })
 ```
 
+Your template must use the `item` variable as seen below. Note you also will need to prevent Spike from attempting to render your template file normally by adding your templates to Spike's `ignore` option, or adding an underscore to the file name.
+
+```html
+<p>{item.title}</p>
+```
+
 Finally, if you'd like to have the output written locally to a JSON file so that it is effectively cached locally, you can pass the name of the file, resolved relative to your project's output, as a `json` option to the plugin. For example:
 
 ```js
