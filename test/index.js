@@ -46,7 +46,7 @@ test.cb('returns valid content', (t) => {
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 2)
+    t.is(locals.rooftop.posts.length, 5)
     t.is(locals.rooftop.case_studies.length, 1)
     t.end()
   })
@@ -148,7 +148,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '91')
+    t.truthy(src === '101969391')
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -212,4 +212,45 @@ test.cb('accepts template object and generates html', (t) => {
   })
 
   project.compile()
+})
+
+test.cb('default transform handles repeater items', (t) => {
+  const locals = {}
+  const api = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    contentTypes: [{
+      name: 'articles'
+    }]
+  })
+
+  api.run(compilerMock, undefined, () => {
+    for (let i = 0; i < 3; i++) {
+      t.is(locals.rooftop.articles[3].content.repeater_test[i].value, `${i}`)
+    }
+    t.end()
+  })
+})
+
+test.cb('default transform works on relationship items', (t) => {
+  const locals = {}
+  const api = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    contentTypes: [{
+      name: 'articles'
+    }]
+  })
+
+  api.run(compilerMock, undefined, () => {
+    let testArticle = locals.rooftop.articles[3]
+    t.truthy(testArticle.content.relationship_test)
+    for (let i = 0; i < 3; i++) {
+      testArticle = testArticle.content.relationship_test[0]
+      t.is(testArticle.title, `Test Article ${i}`)
+    }
+    t.end()
+  })
 })
