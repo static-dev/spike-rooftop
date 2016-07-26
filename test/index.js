@@ -148,7 +148,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '101969391')
+    t.truthy(src === '101969391') // post IDs from carrotcreativedemo
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -207,6 +207,39 @@ test.cb('accepts template object and generates html', (t) => {
     const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/Welcome to Rooftop.html'), 'utf8')
     t.is(file1.trim(), '<p>Testing 123</p>')
     t.is(file2.trim(), '<p>Welcome to Rooftop</p>')
+    rimraf.sync(path.join(projectPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('generates error if template has an error', (t) => {
+  const locals = {}
+  const rooftop = new Rooftop({
+    name: process.env.name,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    contentTypes: [{
+      name: 'case_studies',
+      template: {
+        path: '../template/error.html',
+        output: (item) => `posts/${item.title}.html`
+      }
+    }]
+  })
+
+  const projectPath = path.join(__dirname, 'fixtures/default')
+  const project = new Spike({
+    root: projectPath,
+    posthtml: { plugins: [exp({ locals })] },
+    entry: { main: [path.join(projectPath, 'main.js')] },
+    plugins: [rooftop]
+  })
+
+  project.on('warning', t.end)
+  project.on('error', (error) => {
+    t.is(error.message.message, 'notItem is not defined')
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
