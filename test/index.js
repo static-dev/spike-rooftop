@@ -195,7 +195,7 @@ test.cb('accepts template object and generates html', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    posthtml: { defaults: [exp({ locals })] },
+    posthtml: { plugins: [exp({ locals })] },
     entry: { main: [path.join(projectPath, 'main.js')] },
     plugins: [rooftop]
   })

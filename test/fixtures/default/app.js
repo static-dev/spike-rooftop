@@ -4,7 +4,7 @@ const locals = {}
 
 module.exports = {
   matchers: { html: '**/*.jade' },
-  posthtml: { defaults: [jade(locals)] },
+  posthtml: { plugins: [jade(locals)] },
   plugins: [new Rooftop({
     name: process.env.name,
     apiToken: process.env.token,
