@@ -46,7 +46,7 @@ test.cb('returns valid content', (t) => {
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 5)
+    t.is(locals.rooftop.posts.length, 6)
     t.is(locals.rooftop.case_studies.length, 1)
     t.end()
   })
@@ -148,7 +148,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '101969391') // post IDs from carrotcreativedemo
+    t.truthy(src === '111101969391') // post IDs from carrotcreativedemo
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
