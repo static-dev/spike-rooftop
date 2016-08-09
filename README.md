@@ -27,7 +27,7 @@ const locals = {}
 
 module.exports = {
   plugins: [
-    new Rooftop({ addDataTo: locals, name: 'xxx', apiToken: 'xxx' })
+    new Rooftop({ addDataTo: locals, url: 'https://subdomain.domain.com', apiToken: 'xxx' })
   ],
   posthtml: { defaults: jade(locals) }
 }
@@ -53,7 +53,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts', 'case_studies']
 })
@@ -68,7 +68,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -87,7 +87,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -106,7 +106,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -124,7 +124,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -149,7 +149,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts'],
   json: 'data.json'
@@ -165,11 +165,11 @@ console.log(Rooftop.transform)
 
 ### Testing
 
-To run the tests locally, you'll need to add a `test/.env` with your name and token values:
+To run the tests locally, you'll need to add a `test/.env` with your url and token values:
 
 - `cp test/.env.sample test/.env`
-- `name` is derived from your Rooftop url. Assuming your URL is https://myproject.rooftop.io then **myproject** is your name value
-- `token` can be found <https://[myproject].rooftopcms.io/wp-admin/admin.php?page=rooftop-overview>
+- `url` url to your rooftopcms instance
+- `token` can be found <https://url/wp-admin/admin.php?page=rooftop-overview>
 
 ### License & Contributing
 
