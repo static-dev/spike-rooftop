@@ -18,9 +18,9 @@
     "coveralls": "^2.11.9",
     "dotenv": "^2.0.0",
     "nyc": "^7.1.0",
-    "posthtml-jade": "^0.8.2",
     "posthtml-exp": "^0.9.0",
     "rimraf": "^2.5.2",
+    "snazzy": "^4.0.1",
     "spike-core": "^0.10.0",
     "standard": "^7.1.2"
   },
@@ -37,7 +37,7 @@
   "main": "lib",
   "repository": "static-dev/spike-rooftop",
   "scripts": {
-    "test": "ava",
+    "test": "standard --verbose | snazzy && ava",
     "coverage": "nyc ava",
     "coveralls": "nyc --reporter=lcov ava && cat ./coverage/lcov.info | coveralls"
   }
