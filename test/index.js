@@ -10,43 +10,43 @@ const exp = require('posthtml-exp')
 
 const compilerMock = { options: { spike: { locals: {} } } }
 
-test('errors without a "name"', (t) => {
+test('errors without a "url"', (t) => {
   t.throws(
     () => { new Rooftop() }, // eslint-disable-line
-    'ValidationError: [spike-rooftop constructor] option "name" is required'
+    'ValidationError: [spike-rooftop constructor] option "url" is required'
   )
 })
 
 test('errors without an "apiToken"', (t) => {
   t.throws(
-    () => { new Rooftop({ name: 'xxx' }) }, // eslint-disable-line
+    () => { new Rooftop({ url: 'xxx' }) }, // eslint-disable-line
     'ValidationError: [spike-rooftop constructor] option "apiToken" is required'
   )
 })
 
 test('errors without "addDataTo"', (t) => {
   t.throws(
-    () => { new Rooftop({ name: 'xxx', apiToken: 'xxx' }) }, // eslint-disable-line
+    () => { new Rooftop({ url: 'xxx', apiToken: 'xxx' }) }, // eslint-disable-line
     'ValidationError: [spike-rooftop constructor] option "addDataTo" is required'
   )
 })
 
 test('initializes with a name, apiToken, and addDataTo', (t) => {
-  const rt = new Rooftop({ name: 'xxx', apiToken: 'xxx', addDataTo: {} })
+  const rt = new Rooftop({ url: 'xxx', apiToken: 'xxx', addDataTo: {} })
   t.truthy(rt)
 })
 
 test.cb('returns valid content', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: ['posts', 'case_studies']
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 6)
+    t.is(locals.rooftop.posts.length, 2)
     t.is(locals.rooftop.case_studies.length, 1)
     t.end()
   })
@@ -55,7 +55,7 @@ test.cb('returns valid content', (t) => {
 test.cb('implements request options', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
@@ -65,7 +65,7 @@ test.cb('implements request options', (t) => {
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 1)
+    t.is(locals.rooftop.posts.length, 2)
     t.is(locals.rooftop.posts[0].slug, 'testing-123')
     t.end()
   })
@@ -74,7 +74,7 @@ test.cb('implements request options', (t) => {
 test.cb('works with custom transform function', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
@@ -92,7 +92,7 @@ test.cb('works with custom transform function', (t) => {
 test.cb('implements default transform function', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: ['posts']
@@ -107,7 +107,7 @@ test.cb('implements default transform function', (t) => {
 test.cb('implements default when passing an object', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{ name: 'posts' }]
@@ -122,7 +122,7 @@ test.cb('implements default when passing an object', (t) => {
 test.cb('can disable transform function', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
@@ -148,7 +148,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '111101969391') // post IDs from carrotcreativedemo
+    t.truthy(src === '91') // post IDs from carrotcreativedemo
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -180,7 +180,7 @@ test.cb('writes json output', (t) => {
 test.cb('accepts template object and generates html', (t) => {
   const locals = {}
   const rooftop = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
@@ -217,7 +217,7 @@ test.cb('accepts template object and generates html', (t) => {
 test.cb('generates error if template has an error', (t) => {
   const locals = {}
   const rooftop = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
@@ -250,7 +250,7 @@ test.cb('generates error if template has an error', (t) => {
 test.cb('default transform handles repeater items', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
@@ -269,7 +269,7 @@ test.cb('default transform handles repeater items', (t) => {
 test.cb('default transform works on relationship items', (t) => {
   const locals = {}
   const api = new Rooftop({
-    name: process.env.name,
+    url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
