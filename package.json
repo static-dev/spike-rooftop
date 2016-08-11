@@ -19,6 +19,7 @@
     "dotenv": "^2.0.0",
     "nyc": "^7.1.0",
     "posthtml-exp": "^0.9.0",
+    "posthtml-jade": "^0.8.2",
     "rimraf": "^2.5.2",
     "snazzy": "^4.0.1",
     "spike-core": "^0.10.0",
