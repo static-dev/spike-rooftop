@@ -205,7 +205,6 @@ test.cb('accepts template object and generates html', (t) => {
   project.on('compile', () => {
     const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/Testing 123.html'), 'utf8')
     const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/Welcome to Rooftop.html'), 'utf8')
-    console.log(file1, file2)
     t.is(file1.trim(), '<p>Testing 123</p>')
     t.is(file2.trim(), '<p>Welcome to Rooftop</p>')
     rimraf.sync(path.join(projectPath, 'public'))
@@ -240,7 +239,7 @@ test.cb('generates error if template has an error', (t) => {
 
   project.on('warning', t.end)
   project.on('error', (error) => {
-    t.is(error.message.message, "Cannot read property 'map' of undefined")
+    t.is(error.message.message, "Cannot read property 'title' of undefined")
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
