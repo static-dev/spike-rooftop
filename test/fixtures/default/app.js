@@ -1,10 +1,10 @@
 const Rooftop = require('../../..')
-const jade = require('posthtml-jade')
+const htmlStandards = require('spike-html-standards')
 const locals = {}
 
 module.exports = {
-  matchers: { html: '**/*.jade' },
-  posthtml: { plugins: [jade(locals)] },
+  matchers: { html: '**/*.sml' },
+  reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
   plugins: [new Rooftop({
     url: process.env.url,
     apiToken: process.env.token,

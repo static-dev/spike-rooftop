@@ -6,7 +6,7 @@ const Spike = require('spike-core')
 const path = require('path')
 const fs = require('fs')
 const rimraf = require('rimraf')
-const exp = require('posthtml-exp')
+const htmlStandards = require('spike-html-standards')
 
 const compilerMock = { options: { spike: { locals: {} } } }
 
@@ -148,7 +148,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '91') // post IDs from carrotcreativedemo
+    t.truthy(src === '<p>9</p><p>1</p>') // post IDs from carrotcreativedemo
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -186,7 +186,7 @@ test.cb('accepts template object and generates html', (t) => {
     contentTypes: [{
       name: 'posts',
       template: {
-        path: '../template/template.html',
+        path: '../template/template.sml',
         output: (item) => `posts/${item.title}.html`
       }
     }]
@@ -195,7 +195,7 @@ test.cb('accepts template object and generates html', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    posthtml: { plugins: [exp({ locals })] },
+    reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
     entry: { main: [path.join(projectPath, 'main.js')] },
     plugins: [rooftop]
   })
@@ -223,8 +223,8 @@ test.cb('generates error if template has an error', (t) => {
     contentTypes: [{
       name: 'case_studies',
       template: {
-        path: '../template/error.html',
-        output: (item) => `posts/${item.title}.html`
+        path: '../template/error.sml',
+        output: (item) => `posts/${item.title}.sml`
       }
     }]
   })
@@ -232,14 +232,14 @@ test.cb('generates error if template has an error', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    posthtml: { plugins: [exp({ locals })] },
+    reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
     entry: { main: [path.join(projectPath, 'main.js')] },
     plugins: [rooftop]
   })
 
   project.on('warning', t.end)
   project.on('error', (error) => {
-    t.is(error.message.message, 'notItem is not defined')
+    t.is(error.message.message, "Cannot read property 'title' of undefined")
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
