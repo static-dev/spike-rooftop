@@ -287,3 +287,64 @@ test.cb('default transform works on relationship items', (t) => {
     t.end()
   })
 })
+
+test.cb('hooks - postTransform does not modify locals', (t) => {
+  const locals = { foo: 'bar' }
+  const api = new Rooftop({
+    url: process.env.url,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    hooks: {
+      postTransform: function (posts, locals) { return [posts, {}] }
+    },
+    contentTypes: [{
+      name: 'articles'
+    }]
+  })
+
+  api.run(compilerMock, undefined, () => {
+    t.is(locals.foo, 'bar')
+    t.end()
+  })
+})
+
+test.cb('hooks - postTransform adds to locals', (t) => {
+  const locals = { foo: 'bar' }
+  const api = new Rooftop({
+    url: process.env.url,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    hooks: {
+      postTransform: function (posts, locals) { return [posts, { doge: 'coin' }] }
+    },
+    contentTypes: [{
+      name: 'articles'
+    }]
+  })
+
+  api.run(compilerMock, undefined, () => {
+    t.is(locals.foo, 'bar')
+    t.is(locals.doge, 'coin')
+    t.end()
+  })
+})
+
+test.cb('hooks - postTransform modifies posts', (t) => {
+  const locals = {}
+  const api = new Rooftop({
+    url: process.env.url,
+    apiToken: process.env.token,
+    addDataTo: locals,
+    hooks: {
+      postTransform: function (posts, locals) { return [{ posts: 'foo' }, {}] }
+    },
+    contentTypes: [{
+      name: 'articles'
+    }]
+  })
+
+  api.run(compilerMock, undefined, () => {
+    t.is(locals.rooftop.posts, 'foo')
+    t.end()
+  })
+})
