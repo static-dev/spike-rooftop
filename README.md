@@ -22,25 +22,29 @@ This is a standard [webpack](https://webpack.github.io/) plugin, but is built fo
 ```js
 // app.js
 const Rooftop = require('spike-rooftop')
-const jade = require('posthtml-jade')
+const htmlStandards = require('spike-html-standards')
 const locals = {}
 
 module.exports = {
   plugins: [
     new Rooftop({ addDataTo: locals, name: 'xxx', apiToken: 'xxx' })
   ],
-  posthtml: { defaults: jade(locals) }
+  reshape: (ctx) => {
+    return htmlStandards({
+      locals: { locals }
+    })
+  }
 }
 ```
 
-Since Spike uses posthtml, you can use a variety of different plugins to expose local variables to your html. We are using [jade](https://github.com/posthtml/posthtml-jade) here because it's the plugin provided in spike's default template, and also is currently the only plugin that provides the ability to run complex loops through objects.
+Since Spike uses [reshape](https://github.com/reshape/reshape), you can use a variety of different plugins to expose local variables to your html. We are using [spike html standards](https://github.com/static-dev/spike-html-standards) here because it's the plugin provided in spike's default template, and also is currently the only plugin that provides the ability to run complex loops through objects.
 
 In order to pass the data correctly, you must pass `spike-rooftop` an object, which it will load the data onto when the compile begins under a `rooftop` key. If you also pass the same object to whatever posthtml plugin you are using in whatever manner it requires to make the data available in your html templates, the data will be present on that object before they start compiling. This is a slightly unconventional pattern for javascript libraries, but in this situation is allows for maximum flexibility and convenience.
 
 Once included, it will expose a `rooftop` local to your jade files, which you can use to iterate through your posts. By default, it will only pull the `post` content type, which can be accessed through `rooftop.posts`, as such:
 
 ```jade
-//- a jade file
+//- a template file
 ul
   for post in rooftop.posts
     li= JSON.stringify(post)
