@@ -167,6 +167,34 @@ const Rooftop = require('spike-rooftop')
 console.log(Rooftop.transform)
 ```
 
+#### Hooks
+If you've read this far down, you're ready to unlock some true power over your
+rooftop content.
+
+##### postTransform
+This function allows you to modify all posts & your locals AFTER you've modified your content in your `contentTypes - transform`, and BEFORE you the templates are compiled. You must return an array with the first index containing the posts object and the second index containing the locals object.
+
+**NOTE**: We have written tests to verify if nothing is passed in here, the data will not be modified in anyway. If you've added a postTransform hook and you have an error, start debugging here :smile:
+
+```js
+const locals = {}
+
+new Rooftop({
+  addDataTo: locals,
+  name: 'xxx',
+  apiToken: 'xxx',
+  hooks: {
+    postTransform: (posts, locals) => {
+      // posts = { posts: {} }
+      // locals = {}
+      return [posts, locals]
+    }
+  },
+  contentTypes: ['posts'],
+  json: 'data.json'
+})
+```
+
 ### Testing
 
 To run the tests locally, you'll need to add a `test/.env` with your name and token values:
