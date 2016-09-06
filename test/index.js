@@ -186,7 +186,7 @@ test.cb('accepts template object and generates html', (t) => {
     contentTypes: [{
       name: 'posts',
       template: {
-        path: '../template/template.sml',
+        path: '../template/template.sgr',
         output: (item) => `posts/${item.title}.html`
       }
     }]
@@ -223,8 +223,8 @@ test.cb('generates error if template has an error', (t) => {
     contentTypes: [{
       name: 'case_studies',
       template: {
-        path: '../template/error.sml',
-        output: (item) => `posts/${item.title}.sml`
+        path: '../template/error.sgr',
+        output: (item) => `posts/${item.title}.sgr`
       }
     }]
   })
