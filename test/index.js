@@ -42,12 +42,11 @@ test.cb('returns valid content', (t) => {
     url: process.env.url,
     apiToken: process.env.token,
     addDataTo: locals,
-    contentTypes: ['posts', 'case_studies']
+    contentTypes: ['posts']
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 2)
-    t.is(locals.rooftop.case_studies.length, 1)
+    t.is(locals.rooftop.posts.length, 10)
     t.end()
   })
 })
@@ -60,13 +59,13 @@ test.cb('implements request options', (t) => {
     addDataTo: locals,
     contentTypes: [{
       name: 'posts',
-      search: 'hello'
+      params: { search: 'TASC' }
     }]
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 2)
-    t.is(locals.rooftop.posts[0].slug, 'testing-123')
+    t.is(locals.rooftop.posts.length, 1)
+    t.is(locals.rooftop.posts[0].slug, 'tasc')
     t.end()
   })
 })
@@ -148,7 +147,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '<p>9</p><p>1</p>') // post IDs from carrotcreativedemo
+    t.truthy(src === '<p>172</p><p>168</p><p>164</p><p>166</p><p>162</p><p>160</p><p>170</p><p>158</p><p>156</p><p>131</p>') // post IDs from carrotcreativedemo
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -203,10 +202,10 @@ test.cb('accepts template object and generates html', (t) => {
   project.on('error', t.end)
   project.on('warning', t.end)
   project.on('compile', () => {
-    const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/Testing 123.html'), 'utf8')
-    const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/Welcome to Rooftop.html'), 'utf8')
-    t.is(file1.trim(), '<p>Testing 123</p>')
-    t.is(file2.trim(), '<p>Welcome to Rooftop</p>')
+    const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/ADP.html'), 'utf8')
+    const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/Cigna.html'), 'utf8')
+    t.is(file1.trim(), '<p>ADP</p>')
+    t.is(file2.trim(), '<p>Cigna</p>')
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -221,7 +220,7 @@ test.cb('generates error if template has an error', (t) => {
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
-      name: 'case_studies',
+      name: 'posts',
       template: {
         path: '../template/error.sgr',
         output: (item) => `posts/${item.title}.sgr`
@@ -254,13 +253,16 @@ test.cb('default transform handles repeater items', (t) => {
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
-      name: 'articles'
+      name: 'pages',
+      params: {
+        search: 'Repeater Test'
+      }
     }]
   })
 
   api.run(compilerMock, undefined, () => {
     for (let i = 0; i < 3; i++) {
-      t.is(locals.rooftop.articles[3].content.repeater_test[i].value, `${i}`)
+      t.is(locals.rooftop.pages[0].content.repeater_test[i].value, `${i}`)
     }
     t.end()
   })
@@ -273,17 +275,18 @@ test.cb('default transform works on relationship items', (t) => {
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
-      name: 'articles'
+      name: 'pages',
+      params: {
+        search: 'Repeater Test'
+      }
     }]
   })
 
   api.run(compilerMock, undefined, () => {
-    let testArticle = locals.rooftop.articles[3]
+    let testArticle = locals.rooftop.pages[0]
     t.truthy(testArticle.content.relationship_test)
-    for (let i = 0; i < 3; i++) {
-      testArticle = testArticle.content.relationship_test[0]
-      t.is(testArticle.title, `Test Article ${i}`)
-    }
+    let relatedArticle = testArticle.content.relationship_test[0]
+    t.is(relatedArticle.title, `Here's a Rooftop page`)
     t.end()
   })
 })
@@ -298,7 +301,7 @@ test.cb('hooks - postTransform does not modify locals', (t) => {
       postTransform: function (posts, locals) { return [posts, {}] }
     },
     contentTypes: [{
-      name: 'articles'
+      name: 'pages'
     }]
   })
 
@@ -318,7 +321,7 @@ test.cb('hooks - postTransform adds to locals', (t) => {
       postTransform: function (posts, locals) { return [posts, { doge: 'coin' }] }
     },
     contentTypes: [{
-      name: 'articles'
+      name: 'pages'
     }]
   })
 
@@ -339,7 +342,7 @@ test.cb('hooks - postTransform modifies posts', (t) => {
       postTransform: function (posts, locals) { return [{ posts: 'foo' }, {}] }
     },
     contentTypes: [{
-      name: 'articles'
+      name: 'pages'
     }]
   })
 

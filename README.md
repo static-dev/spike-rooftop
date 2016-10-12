@@ -65,7 +65,7 @@ new Rooftop({
 
 This would pull any `case_studies` and add it to `rooftop.case_studies` in your jade files.
 
-Now let's say you want to get a little more granular in which posts you are pulling, what order they are in, etc. Rather than passing a string through the `contentTypes` array, you can pass an object instead with some extra options. For example:
+Now let's say you want to get a little more granular in which posts you are pulling, what order they are in, etc. Rather than passing a string through the `contentTypes` array, you can pass an object instead with some extra options under a `params` key. For example:
 
 ```js
 const locals = {}
@@ -76,8 +76,10 @@ new Rooftop({
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
-    order: 'asc',
-    search: 'hello'
+    params: {
+      order: 'asc',
+      search: 'hello'
+    }
   }]
 })
 ```
