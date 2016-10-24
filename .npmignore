@@ -3,3 +3,4 @@ contributing.md
 .editorconfig
 .travis.yml
 .nyc_output
+yarn.lock

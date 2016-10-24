@@ -46,7 +46,7 @@ test.cb('returns valid content', (t) => {
   })
 
   api.run(compilerMock, undefined, () => {
-    t.is(locals.rooftop.posts.length, 10)
+    t.is(locals.rooftop.posts.length, 2)
     t.end()
   })
 })
@@ -59,13 +59,13 @@ test.cb('implements request options', (t) => {
     addDataTo: locals,
     contentTypes: [{
       name: 'posts',
-      params: { search: 'TASC' }
+      params: { search: '2' }
     }]
   })
 
   api.run(compilerMock, undefined, () => {
     t.is(locals.rooftop.posts.length, 1)
-    t.is(locals.rooftop.posts[0].slug, 'tasc')
+    t.is(locals.rooftop.posts[0].slug, 'post2')
     t.end()
   })
 })
@@ -147,7 +147,7 @@ test.cb('works as a plugin to spike', (t) => {
   project.on('warning', t.end)
   project.on('compile', () => {
     const src = fs.readFileSync(path.join(projectPath, 'public/index.html'), 'utf8')
-    t.truthy(src === '<p>172</p><p>168</p><p>164</p><p>166</p><p>162</p><p>160</p><p>170</p><p>158</p><p>156</p><p>131</p>') // post IDs from carrotcreativedemo
+    t.truthy(src === '<p>7</p><p>1</p>') // post IDs from rooftop-seeds
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -186,7 +186,7 @@ test.cb('accepts template object and generates html', (t) => {
       name: 'posts',
       template: {
         path: '../template/template.sgr',
-        output: (item) => `posts/${item.title}.html`
+        output: (item) => `posts/${item.slug}.html`
       }
     }]
   })
@@ -202,10 +202,10 @@ test.cb('accepts template object and generates html', (t) => {
   project.on('error', t.end)
   project.on('warning', t.end)
   project.on('compile', () => {
-    const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/ADP.html'), 'utf8')
-    const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/Cigna.html'), 'utf8')
-    t.is(file1.trim(), '<p>ADP</p>')
-    t.is(file2.trim(), '<p>Cigna</p>')
+    const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/post1.html'), 'utf8')
+    const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/post2.html'), 'utf8')
+    t.is(file1.trim(), '<p>Post 1</p>')
+    t.is(file2.trim(), '<p>Post 2</p>')
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
@@ -253,16 +253,13 @@ test.cb('default transform handles repeater items', (t) => {
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
-      name: 'pages',
-      params: {
-        search: 'Repeater Test'
-      }
+      name: 'seeds'
     }]
   })
 
   api.run(compilerMock, undefined, () => {
     for (let i = 0; i < 3; i++) {
-      t.is(locals.rooftop.pages[0].content.repeater_test[i].value, `${i}`)
+      t.is(locals.rooftop.seeds[0].content.repeater[i].value, `${i}`)
     }
     t.end()
   })
@@ -275,18 +272,15 @@ test.cb('default transform works on relationship items', (t) => {
     apiToken: process.env.token,
     addDataTo: locals,
     contentTypes: [{
-      name: 'pages',
-      params: {
-        search: 'Repeater Test'
-      }
+      name: 'seeds'
     }]
   })
 
   api.run(compilerMock, undefined, () => {
-    let testArticle = locals.rooftop.pages[0]
-    t.truthy(testArticle.content.relationship_test)
-    let relatedArticle = testArticle.content.relationship_test[0]
-    t.is(relatedArticle.title, `Here's a Rooftop page`)
+    let testSeed = locals.rooftop.seeds[0]
+    t.truthy(testSeed.content.related_post)
+    let relatedPost = testSeed.content.related_post[0]
+    t.is(relatedPost.title, 'Post 2')
     t.end()
   })
 })
