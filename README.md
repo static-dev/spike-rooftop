@@ -199,11 +199,9 @@ new Rooftop({
 
 ### Testing
 
-To run the tests locally, you'll need to add a `test/.env` with your name and token values:
+This project uses the `rooftop-seeds` project, which is a hosted rooftop instance with a public read-only key used specifically for testing OSS products that rely on rooftop. Please do not abuse this free service.
 
-- `cp test/.env.sample test/.env`
-- `name` is derived from your Rooftop url. Assuming your URL is https://myproject.rooftop.io then **myproject** is your name value
-- `token` can be found <https://[myproject].rooftopcms.io/wp-admin/admin.php?page=rooftop-overview>
+If any changes are needed to the test data in order to properly test a new feature, please file an issue and we will make the changes as required!
 
 ### License & Contributing
 
