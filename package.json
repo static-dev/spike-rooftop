@@ -9,7 +9,7 @@
   },
   "bugs": "https://github.com/static-dev/spike-rooftop/issues",
   "dependencies": {
-    "joi": "^9.2.0",
+    "joi": "^10.0.0",
     "reshape": "^0.3.0",
     "reshape-loader": "^0.3.0",
     "rooftop-client": "^0.2.1",
