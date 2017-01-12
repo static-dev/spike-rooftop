@@ -238,7 +238,7 @@ test.cb('generates error if template has an error', (t) => {
 
   project.on('warning', t.end)
   project.on('error', (error) => {
-    t.is(error.message.message, "Cannot read property 'title' of undefined")
+    t.is(error.toString(), "Error: Cannot read property 'title' of undefined")
     rimraf.sync(path.join(projectPath, 'public'))
     t.end()
   })
