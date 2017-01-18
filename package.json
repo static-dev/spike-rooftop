@@ -11,7 +11,7 @@
   "dependencies": {
     "joi": "^10.0.0",
     "reshape": "^0.4.0",
-    "reshape-loader": "^0.3.0",
+    "reshape-loader": "^0.4.0",
     "rooftop-client": "^0.2.1",
     "when": "^3.7.7"
   },
