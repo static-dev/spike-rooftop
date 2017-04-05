@@ -6,7 +6,7 @@ const Spike = require('spike-core')
 const path = require('path')
 const fs = require('fs')
 const rimraf = require('rimraf')
-const htmlStandards = require('spike-html-standards')
+const standard = require('reshape-standard')
 
 const compilerMock = { options: { spike: { locals: {} } } }
 
@@ -176,32 +176,32 @@ test.cb('writes json output', (t) => {
   project.compile()
 })
 
-test.cb('accepts template object and generates html', (t) => {
+test.only.cb('accepts template object and generates html', (t) => {
   const locals = {}
-  const rooftop = new Rooftop({
-    url: process.env.url,
-    apiToken: process.env.token,
-    addDataTo: locals,
-    contentTypes: [{
-      name: 'posts',
-      template: {
-        path: '../template/template.sgr',
-        output: (item) => `posts/${item.slug}.html`
-      }
-    }]
-  })
 
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
+    reshape: standard({ locals }),
     entry: { main: [path.join(projectPath, 'main.js')] },
-    plugins: [rooftop]
+    plugins: [new Rooftop({
+      url: process.env.url,
+      apiToken: process.env.token,
+      addDataTo: locals,
+      contentTypes: [{
+        name: 'posts',
+        template: {
+          path: '../template/template.sgr',
+          output: (item) => `posts/${item.slug}.html`
+        }
+      }]
+    })]
   })
 
   project.on('error', t.end)
   project.on('warning', t.end)
   project.on('compile', () => {
+    console.log('done?')
     const file1 = fs.readFileSync(path.join(projectPath, 'public/posts/post1.html'), 'utf8')
     const file2 = fs.readFileSync(path.join(projectPath, 'public/posts/post2.html'), 'utf8')
     t.is(file1.trim(), '<p>Post 1</p>')
@@ -231,7 +231,7 @@ test.cb('generates error if template has an error', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
+    reshape: standard({ locals }),
     entry: { main: [path.join(projectPath, 'main.js')] },
     plugins: [rooftop]
   })

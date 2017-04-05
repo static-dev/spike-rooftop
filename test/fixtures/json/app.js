@@ -1,10 +1,10 @@
 const Rooftop = require('../../..')
-const htmlStandards = require('spike-html-standards')
+const htmlStandards = require('reshape-standard')
 const locals = {}
 
 module.exports = {
   matchers: { html: '*(**/)*.sgr' },
-  reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
+  reshape: htmlStandards({ locals }),
   plugins: [new Rooftop({
     url: process.env.url,
     apiToken: process.env.token,
