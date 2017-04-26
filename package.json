@@ -22,7 +22,7 @@
     "nyc": "^10.1.2",
     "rimraf": "^2.5.2",
     "snazzy": "^6.0.0",
-    "spike-core": "^0.13.3",
+    "spike-core": "^1.1.0",
     "spike-html-standards": "^0.3.4",
     "standard": "^9.0.0"
   },
