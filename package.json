@@ -9,22 +9,23 @@
   },
   "bugs": "https://github.com/static-dev/spike-rooftop/issues",
   "dependencies": {
-    "joi": "^10.2.0",
+    "joi": "^10.6.0",
     "reshape": "^0.4.0",
-    "reshape-loader": "^0.4.0",
+    "reshape-loader": "^1.0.0",
     "rooftop-client": "^0.2.1",
-    "when": "^3.7.7"
+    "spike-util": "^1.2.0",
+    "when": "^3.7.8"
   },
   "devDependencies": {
-    "ava": "^0.19.0",
-    "coveralls": "^2.11.15",
+    "ava": "^0.20.0",
+    "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
-    "nyc": "^10.1.2",
-    "rimraf": "^2.5.2",
-    "snazzy": "^6.0.0",
-    "spike-core": "^0.13.3",
+    "nyc": "^11.0.3",
+    "rimraf": "^2.6.1",
+    "snazzy": "^7.0.0",
+    "spike-core": "^2.0.0",
     "spike-html-standards": "^0.3.4",
-    "standard": "^9.0.0"
+    "standard": "^10.0.2"
   },
   "engines": {
     "node": ">= 6.0.0"

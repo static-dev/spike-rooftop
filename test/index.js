@@ -194,7 +194,7 @@ test.cb('accepts template object and generates html', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
+    reshape: htmlStandards({ locals: () => locals }),
     entry: { main: [path.join(projectPath, 'main.js')] },
     plugins: [rooftop]
   })
@@ -231,7 +231,7 @@ test.cb('generates error if template has an error', (t) => {
   const projectPath = path.join(__dirname, 'fixtures/default')
   const project = new Spike({
     root: projectPath,
-    reshape: (ctx) => htmlStandards({ webpack: ctx, locals }),
+    reshape: htmlStandards({ locals: () => locals }),
     entry: { main: [path.join(projectPath, 'main.js')] },
     plugins: [rooftop]
   })

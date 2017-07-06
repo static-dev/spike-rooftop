@@ -22,18 +22,14 @@ This is a standard [webpack](https://webpack.github.io/) plugin, but is built fo
 ```js
 // app.js
 const Rooftop = require('spike-rooftop')
-const htmlStandards = require('spike-html-standards')
+const htmlStandards = require('reshape-standard')
 const locals = {}
 
 module.exports = {
   plugins: [
     new Rooftop({ addDataTo: locals, name: 'xxx', apiToken: 'xxx' })
   ],
-  reshape: (ctx) => {
-    return htmlStandards({
-      locals: { locals }
-    })
-  }
+  reshape: htmlStandards({ locals: () => locals })
 }
 ```
 
@@ -134,7 +130,7 @@ new Rooftop({
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
-    template: : {
+    template: {
       path: 'templates/post.html',
       output: (post) => { return `posts/${post.slug}.html` }
     }
