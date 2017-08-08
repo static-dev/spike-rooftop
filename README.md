@@ -27,7 +27,7 @@ const locals = {}
 
 module.exports = {
   plugins: [
-    new Rooftop({ addDataTo: locals, name: 'xxx', apiToken: 'xxx' })
+    new Rooftop({ addDataTo: locals, url: 'xxx', apiToken: 'xxx' })
   ],
   reshape: htmlStandards({ locals: () => locals })
 }
@@ -53,7 +53,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts', 'case_studies']
 })
@@ -68,7 +68,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -89,7 +89,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -108,7 +108,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -126,7 +126,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: [{
     name: 'posts',
@@ -151,7 +151,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   contentTypes: ['posts'],
   json: 'data.json'
@@ -179,7 +179,7 @@ const locals = {}
 
 new Rooftop({
   addDataTo: locals,
-  name: 'xxx',
+  url: 'xxx',
   apiToken: 'xxx',
   hooks: {
     postTransform: (posts, locals) => {
