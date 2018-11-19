@@ -3082,6 +3082,10 @@ hoek@4.x.x:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.1.0.tgz#4a4557460f69842ed463aa00628cc26d2683afa7"
 
+hoek@6.x.x:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-6.0.3.tgz#7884360426d927865a0a1251fc9c59313af5b798"
+
 home-or-tmp@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-1.0.0.tgz#4b9f1e40800c3e50c6c27f781676afcce71f3985"
@@ -3553,6 +3557,12 @@ isemail@2.x.x:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/isemail/-/isemail-2.2.1.tgz#0353d3d9a62951080c262c2aa0a42b8ea8e9e2a6"
 
+isemail@3.x.x:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/isemail/-/isemail-3.2.0.tgz#59310a021931a9fb06bbb51e155ce0b3f236832c"
+  dependencies:
+    punycode "2.x.x"
+
 isexe@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-1.1.2.tgz#36f3e22e60750920f5e7241a476a8c6a42275ad0"
@@ -3645,6 +3655,22 @@ joi@^10.2.0:
     isemail "2.x.x"
     items "2.x.x"
     topo "2.x.x"
+
+joi@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-12.0.0.tgz#46f55e68f4d9628f01bbb695902c8b307ad8d33a"
+  dependencies:
+    hoek "4.x.x"
+    isemail "3.x.x"
+    topo "2.x.x"
+
+joi@^14.1.0:
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-14.1.0.tgz#98a7923108a9f361192551b29f538488d07953cc"
+  dependencies:
+    hoek "6.x.x"
+    isemail "3.x.x"
+    topo "3.x.x"
 
 joi@^9.0.4:
   version "9.2.0"
@@ -3927,6 +3953,10 @@ lodash.isfinite@^3.3.2:
 lodash.merge@^4.4.0, lodash.merge@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
+
+lodash.merge@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
 
 lodash.union@^4.6.0:
   version "4.6.0"
@@ -4663,6 +4693,10 @@ parse5@^2.1.5:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-2.2.3.tgz#0c4fc41c1000c5e6b93d48b03f8083837834e9f6"
 
+parse5@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
+
 parsejson@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/parsejson/-/parsejson-0.0.3.tgz#ab7e3759f209ece99437973f7d0f1f64ae0e64ab"
@@ -5142,6 +5176,10 @@ punycode@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
 
+punycode@2.x.x:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
+
 punycode@^1.2.4:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
@@ -5511,6 +5549,13 @@ reshape-code-gen@^0.2.1:
     objectfn "^2.0.0"
     with "^5.1.1"
 
+reshape-code-gen@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/reshape-code-gen/-/reshape-code-gen-1.0.0.tgz#c7d23cb133eacc9e5c1e6a83b3fe57c200e18eb0"
+  dependencies:
+    objectfn "^2.0.0"
+    with "^5.1.1"
+
 reshape-content@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/reshape-content/-/reshape-content-0.2.0.tgz#66a64384a9caa5f5d6f76d7e6d267ca22a9ec7c3"
@@ -5562,6 +5607,12 @@ reshape-parser@^0.2.1:
   dependencies:
     parse5 "^2.1.5"
 
+reshape-parser@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/reshape-parser/-/reshape-parser-0.3.1.tgz#9da89b9524c94f86248ccdf2ddcdaa800ae51de2"
+  dependencies:
+    parse5 "^4.0.0"
+
 reshape-plugin-util@^0.2.0, reshape-plugin-util@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/reshape-plugin-util/-/reshape-plugin-util-0.2.1.tgz#29358959d58c9eebca25c35efe0cc627817cf092"
@@ -5576,7 +5627,7 @@ reshape-retext@^0.1.1:
     retext "^3.0.0"
     when "^3.7.7"
 
-reshape@^0.4.0, reshape@^0.4.1:
+reshape@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/reshape/-/reshape-0.4.1.tgz#19f0179ca4d172219875f71e66b6bc4048ee3e72"
   dependencies:
@@ -5586,6 +5637,17 @@ reshape@^0.4.0, reshape@^0.4.1:
     reshape-code-gen "^0.2.1"
     reshape-parser "^0.2.1"
     when "^3.7.7"
+
+reshape@^0.5.0:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/reshape/-/reshape-0.5.1.tgz#50e21eca8cbdb8e6671f42d5fe693c0ed5ddc958"
+  dependencies:
+    code-frame "^5.0.0"
+    joi "^12.0.0"
+    lodash.merge "^4.6.1"
+    reshape-code-gen "^1.0.0"
+    reshape-parser "^0.3.1"
+    when "^3.7.8"
 
 resolve-cwd@^1.0.0:
   version "1.0.0"
@@ -6456,6 +6518,12 @@ topo@2.x.x:
   resolved "https://registry.yarnpkg.com/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
   dependencies:
     hoek "4.x.x"
+
+topo@3.x.x:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/topo/-/topo-3.0.3.tgz#d5a67fb2e69307ebeeb08402ec2a2a6f5f7ad95c"
+  dependencies:
+    hoek "6.x.x"
 
 tough-cookie@~2.3.0:
   version "2.3.1"
