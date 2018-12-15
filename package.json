@@ -17,7 +17,7 @@
     "when": "^3.7.8"
   },
   "devDependencies": {
-    "ava": "^0.20.0",
+    "ava": "^1.0.1",
     "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
     "nyc": "^11.0.3",
